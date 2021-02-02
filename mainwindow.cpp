@@ -44,50 +44,6 @@ MainWindow::~MainWindow()
 }
 
 
-//void MainWindow::on_gen_btn_clicked()
-//{
-//    QElapsedTimer t;
-//    t.start();
-
-//    QImage image(ui->graphicsView->size(), QImage::Format_RGB888);
-//    image.fill(Qt::white);
-//    QPainter painter(&image);
-//    QPen pen(Qt::black);
-//    painter.setPen(pen);
-
-//    auto triangle = random_triangle(QRect({0, 0}, ui->graphicsView->size()));
-//    QRect brect = triangle.boundingRect();
-//    QPoint evecs[3];
-//    evecs[0] = triangle[1] - triangle[0];
-//    evecs[1] = triangle[2] - triangle[1];
-//    evecs[2] = triangle[0] - triangle[2];
-
-//    int ax, ay, w, h;
-//    brect.getRect(&ax, &ay, &w, &h);
-//    QPoint a = { ax, ay };
-//    for (int y = 0; y < h; ++y) {
-//        for (int x = 0; x < w; ++x) {
-//            QPoint p = a + QPoint(x, y);
-//            int cprods[3];
-//            for (int k = 0; k < 3; ++k) {
-//                cprods[k] = cross_product(p - triangle[k], evecs[k]);
-//            }
-//            if (   std::all_of(cprods, cprods + 3, [=](int cp){ return cp >= 0; })
-//                || std::all_of(cprods, cprods + 3, [=](int cp){ return cp <= 0; })) {
-//                QColor color = QColor::fromRgb(rng.generate());
-//                QPen pen(color);
-//                painter.setPen(pen);
-//                painter.drawPoint(p);
-//            }
-//        }
-//    }
-//    painter.end();
-//    scene->clear();
-//    scene->setSceneRect(ui->graphicsView->rect());
-//    scene->addPixmap(QPixmap::fromImage(image))->setPos(0, 0);
-//    ui->time_label->setText("Time: " + QString::number(t.elapsed()) + " ms");
-//}
-
 void MainWindow::on_gen_btn_clicked()
 {
     QElapsedTimer t;
@@ -169,23 +125,6 @@ void MainWindow::on_thous_gen_btn_clicked()
         int ax, ay, w, h;
         brect.getRect(&ax, &ay, &w, &h);
         QPoint a = { ax, ay };
-        // slow
-//        for (int y = 0; y < h; ++y) {
-//            for (int x = 0; x < w; ++x) {
-//                QPoint p = a + QPoint(x, y);
-//                int cprods[3];
-//                for (int k = 0; k < 3; ++k) {
-//                    cprods[k] = cross_product(p - triangle[k], evecs[k]);
-//                }
-//                if (   std::all_of(cprods, cprods + 3, [=](int cp){ return cp >= 0; })
-//                    || std::all_of(cprods, cprods + 3, [=](int cp){ return cp <= 0; })) {
-//                    QColor color = QColor::fromRgb(rng.generate());
-//                    QPen pen(color);
-//                    painter.setPen(pen);
-//                    painter.drawPoint(p);
-//                }
-//            }
-//        }
         QRgb* bits = reinterpret_cast<QRgb*>(image.bits());
         for (int y = 0; y < h; ++y) {
             for (int x = 0; x < w; ++x) {
